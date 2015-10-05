@@ -32,3 +32,82 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	protected $hidden = ['password', 'remember_token'];
 
 }
+/*
+<?php namespace App\Models;
+
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+
+class User extends Model implements AuthenticatableContract{
+
+	use Authenticatable;
+
+	protected $table = 'users';
+
+}
+
+
+<?php namespace App\Models;
+use DB;
+use Illuminate\Database\Eloquent\Model;
+
+class Purchase extends Model {
+
+	protected $table = 'purchase';
+	
+	public static function joining(){
+		
+		return DB::table('purchase')
+            ->join('suppliers', 'purchase.suppliersid', '=', 'suppliers.id')
+			->select('purchase.id','purchase.name as pname', 'suppliers.name as sname', 'purchase.suppliersbilldate','purchase.status')
+			->where('purchase.cstatus',0)
+            ->orderBy('id', 'desc')->take(10)->get();
+		//$voucher = Voucher::orderBy('id', 'desc')->take(10)->get();
+		//DB::table('users')
+            //->join('contacts', 'users.id', '=', 'contacts.user_id')
+           // ->join('orders', 'users.id', '=', 'orders.user_id')
+           // ->select('users.id', 'contacts.phone', 'orders.price')
+           // ->get();
+	}
+
+}
+
+
+
+<?php namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+use DB;
+class Info extends Model {
+	public static function callinfo($value,$spname){
+		$cn=count($value);
+		$str="call  ".$spname."(";
+		for($i=0;$i<$cn;$i++)
+		{
+			$strarray="'$value[$i]',";
+			$str=$str.$strarray;
+		}
+		$len=strlen($str);
+		$strtext= substr($str,0,$len-1);
+        $strfinal=');'; 		
+		$strlast=$strtext.$strfinal;
+		$result= DB::select(DB::raw("$strlast"));	
+		return $result;
+	}
+        
+}
+
+<?php namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
+use DB;
+class Combo extends Model {
+    public static function callcombo($spname){
+		$str="call  ".$spname."(";
+        $strfinal=');'; 		
+		$strlast=$str.$strfinal;
+		$result= DB::select(DB::raw("$strlast"));
+		return $result;
+	}	
+}
+
+*/
