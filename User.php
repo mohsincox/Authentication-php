@@ -111,3 +111,45 @@ class Combo extends Model {
 }
 
 */
+
+/*
+//VIEW
+function cancel_status(sales_id) {	            			
+		    //alert(sales_id);	
+            $_token = "{{ csrf_token() }}";
+            $.ajax({
+	            type: "POST",
+	            url: "physicalsales/cancel_status",
+	            data: {
+					_token: $_token,
+					sales_id: sales_id,
+					},
+	            success: function (response) {
+	            	if(response == 0){
+	            		alert("Not found this item.");
+	            	} else if(response == 1){
+	            		location.reload();
+	            	}
+	           	}
+	        });			
+}
+//ROUTER
+Route::any('physicalsales/cancel_status', 'PhysicalsaleController@cancel_status');
+
+//CONTROLLER
+public function cancel_status(Request $request)
+	{
+		    
+			if($request->ajax()){
+				$sales_id=$request->input('sales_id');
+				$sales=Physicalsale::find($sales_id);
+				if(!empty($sales)){
+				    $sales->delete();
+				}else{
+					return response()->json(0);
+				}
+				return response()->json(1);
+			}
+	}
+
+*/
