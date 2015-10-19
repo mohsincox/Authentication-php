@@ -114,6 +114,8 @@ class Combo extends Model {
 
 /*
 //VIEW
+<button  class="btn_small btn_blue"  onclick="cancel_status('{{$p->id}}')">Cancel</button>
+
 function cancel_status(sales_id) {	            			
 		    //alert(sales_id);	
             $_token = "{{ csrf_token() }}";
