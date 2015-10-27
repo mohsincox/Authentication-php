@@ -89,34 +89,31 @@ class UserController extends Controller {
 		User::destroy($id);
 		Session::flash('success', 'Successfully Deleted.'); 
 		return Redirect('show');
-	}		 
-	/*public function update()
-	{
-		
-		$users = User::where('email', 'ttt')->first();
-		$users->name = 'moh';
-		$users->email = 'moh@g.com';
-		$users->save();
-		echo 'successfully updated information.';
 	}
-	
-	public function delete()
+	/*
+	public function regist(Request $request)
 	{
-		
-		$affectedRows = User::where('email', 'bbb')->delete();
-		echo 'successfully deleted information.';
+		//////////////////////////////// Additional code for unique user name and user id //////////////
+		$rules = array(
+                'name' => 'required|unique:users',
+				'password' => 'required|min:3',
+				'user_type' => 'required',
+				'user_id' => 'required|unique:users',
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return Redirect('abc')
+                                ->withErrors($validator);
+            } else {    ////////////////////////////////////////// end /////////////////////
+				$user = new User();
+				$user->name = $request->input('name');
+				$user->password = Hash::make($request->input('password'));
+				$user->user_type = $request->input('user_type');
+				$user->user_id = $request->input('user_id');
+				$user->save();
+				echo 'successfully Inserted.';
+				return redirect('show');
+			}
 	}
+	*/ 
 	
-	
-	public function login()
-	{
-		return view('log');
-	}
-
-	public function loginchack(Request $request)
-	{
-		
-		echo $request->input('email')."<br>";
-		echo $request->input('password')."<br>";
-	}*/
-}
